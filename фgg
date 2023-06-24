@@ -4,112 +4,166 @@ def handle_signal(signal):
         chat = signal['chat']
         source = signal.get('source', 'беседа')
         # Обработка сигнала addUser
-
-    elif signal == 'banExpired':
-        user_id = signal['user_id']
-        chat = signal['chat']
-        comment = signal['comment']
+        print(f"Добавление пользователя {user_id} в чат {chat}. Источник: {source}")
+    elif signal == 'Срок запрета истек':
+        идентификатор_пользователя = signal['идентификатор_пользователя']
+        чат = signal['чат']
+        комментарий = signal['комментарий']
         conversation_message_id = signal['conversation_message_id']
         # Обработка сигнала banExpired
-
+        print(f"Истек срок блокировки пользователя {идентификатор_пользователя} в чате {чат}. Комментарий: {комментарий}. Идентификатор сообщения: {conversation_message_id}")
     elif signal == 'banGetReason':
-        chat = signal['chat']
+        чат = signal['чат']
         local_id = signal['local_id']
-        message = signal['message']
+        сообщение = signal['сообщение']
         # Обработка сигнала banGetReason
-
+        print(f"Получена причина блокировки в чате {чат} для сообщения с локальным ID {local_id}. Сообщение: {сообщение}")
     elif signal == 'bindChat':
         chat = signal['chat']
         # Обработка сигнала bindChat
-
+        print(f"Привязка чата {chat}")
     elif signal == 'deleteMessagesFromUser':
-        chat = signal['chat']
-        user_id = signal.get('user_id')
-        member_ids = signal.get('member_ids')
-        amount = signal.get('amount')
+        чат = signal['чат']
+        идентификатор_пользователя = signal.get('идентификатор_пользователя')
+        идентификаторы_участников = signal.get('идентификаторы_участников')
+        количество = signal.get('количество')
         is_spam = signal.get('is_spam')
-        silent = signal.get('silent')
+        беззвучный = signal.get('беззвучный')
         # Обработка сигнала deleteMessagesFromUser
-
+        if идентификатор_пользователя:
+            print(f"Удаление сообщений от пользователя {идентификатор_пользователя} в чате {чат}")
+        elif идентификаторы_участников:
+            print(f"Удаление сообщений от участников {идентификаторы_участников} в чате {чат}")
+        else:
+            print(f"Удаление сообщений в чате {чат}")
+        if количество:
+            print(f"Количество сообщений: {количество}")
+        if is_spam:
+            print("Удаление помеченных как спам")
+        if беззвучный:
+            print("Удаление без уведомлений")
     elif signal == 'deleteMessages':
-        chat = signal['chat']
+        чат = signal['чат']
         local_ids = signal['local_ids']
         is_spam = signal['is_spam']
         silent = signal['silent']
         # Обработка сигнала deleteMessages
-
+        print(f"Удаление сообщений в чате {чат}")
+        print(f"Локальные ID сообщений: {local_ids}")
+        if is_spam:
+            print("Удаление помеченных как спам")
+        if silent:
+            print("Удаление без уведомлений")
     elif signal == 'forbiddenLinks':
-        chat = signal['chat']
+        чат = signal['чат']
         local_ids = signal['local_ids']
         # Обработка сигнала forbiddenLinks
-
+        print(f"Запрещенные ссылки в чате {чат}")
+        print(f"Локальные ID сообщений: {local_ids}")
     elif signal == 'ping':
         # Обработка сигнала ping
-
+        print("Получен сигнал ping")
     elif signal == 'printBookmark':
         chat = signal['chat']
         conversation_message_id = signal['conversation_message_id']
         description = signal['description']
         # Обработка сигнала printBookmark
-
+        print(f"Печать закладки в чате {chat}")
+        print(f"ID сообщения: {conversation_message_id}")
+        print(f"Описание: {description}")
     elif signal == 'subscribeSignals':
         chat = signal['chat']
         conversation_message_id = signal['conversation_message_id']
         text = signal['text']
         from_id = signal['from_id']
         # Обработка сигнала subscribeSignals
-
+        print(f"Подписка на сигналы в чате {chat}")
+        print(f"ID сообщения: {conversation_message_id}")
+        print(f"Текст: {text}")
+        print(f"Отправитель: {from_id}")
     elif signal == 'toGroup':
-        chat = signal['chat']
+        чат = signal['чат']
         group_id = signal['group_id']
         local_id = signal['local_id']
         # Обработка сигнала toGroup
-
+        print(f"Пересылка сообщения из чата {чат} в группу {group_id}. Локальный Идентификатор: {local_id}")
     elif signal == 'sendSignal':
-        chat = signal['chat']
-        from_id = signal['from_id']
-        value = signal['value']
+        чат = signal['чат']
+        от_id = signal['от_id']
+        значение = signal['значение']
         conversation_message_id = signal['conversation_message_id']
         # Обработка сигнала sendSignal
-
+        print(f"Отправка сигнала в чат {чат}")
+        print(f"Отправитель: {от_id}")
+        print(f"Значение: {значение}")
+        print(f"ID сообщения: {conversation_message_id}")
     elif signal == 'sendMySignal':
         chat = signal['chat']
         from_id = signal['from_id']
         value = signal['value']
         conversation_message_id = signal['conversation_message_id']
         # Обработка сигнала sendMySignal
-
+        print(f"Отправка моего сигнала в чат {chat}")
+        print(f"Отправитель: {from_id}")
+        print(f"Значение: {value}")
+        print(f"ID сообщения: {conversation_message_id}")
     elif signal == 'hireApi':
-        chat = signal['chat']
-        price = signal['price']
+        чат = signal['чат']
+        цена = signal['цена']
         # Обработка сигнала hireApi
-
+        print(f"Найм API в чате {чат}")
+        print(f"Цена: {цена}")
     elif signal == 'meetChatDuty':
         chat = signal['chat']
         duty_id = signal['duty_id']
         # Обработка сигнала meetChatDuty
-
+        print(f"Встреча обязанности в чате {chat}")
+        print(f"ID обязанности: {duty_id}")
     elif signal == 'messages.deleteByType':
-        chat = signal['chat']
-        message_type = signal['type']
+        чат = signal['чат']
+        message_type = signal['тип']
         local_id = signal['local_id']
-        offset = signal['offset']
+        смещение = signal['смещение']
         is_spam = signal['is_spam']
-        silent = signal.get('silent')
+        silent = signal.get('тихий')
         admin_ids = signal.get('admin_ids')
-        time = signal.get('time')
-        amount = signal.get('amount')
+        time = signal.get('время')
+        amount = signal.get('сумма')
         # Обработка сигнала messages.deleteByType
-
+        print(f"Удаление сообщений определенного типа в чате {чат}")
+        print(f"Тип сообщений: {message_type}")
+        print(f"Локальный ID сообщения: {local_id}")
+        print(f"Смещение: {смещение}")
+        if is_spam:
+            print("Удаление помеченных как спам")
+        if silent:
+            print("Удаление без уведомлений")
+        if admin_ids:
+            print(f"ID администраторов: {admin_ids}")
+        if time:
+            print(f"Временной диапазон: {time}")
+        if amount:
+            print(f"Количество сообщений: {amount}")
     elif signal == 'groupbots.invited':
         group_id = signal['group_id']
         chat = signal.get('chat')
         # Обработка сигнала groupbots.invited
-
+        if chat:
+            print(f"Приглашение бота в чат {chat} группы {group_id}")
+        else:
+            print(f"Приглашение бота в группу {group_id}")
     elif signal == 'messages.recogniseAudioMessage':
         local_id = signal['local_id']
         chat = signal['chat']
         # Обработка сигнала messages.recogniseAudioMessage
-
+        print(f"Распознавание аудиосообщения в чате {chat}. Локальный ID: {local_id}")
     else:
         print(f"Неизвестный метод сигнала: {signal}")
+
+    # Обработка POST запроса
+    if method == 'POST':
+        data = event['data']
+        print(f"Получен POST запрос с данными: {data}")
+
+# Регистрация обработчика сигналов
+register_signal_handler(handle_signal)
